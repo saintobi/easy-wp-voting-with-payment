@@ -15,6 +15,7 @@ function easy_wp_voting_ajax()
     $quantity = wp_strip_all_tags($_POST['quantity']);
     $userID = wp_strip_all_tags($_POST['userID']);
     $reference = wp_strip_all_tags($_POST['reference']);
+    $email = wp_strip_all_tags($_POST['email']);
 
 //The parameter after verify/ is the transaction reference to be verified
     $url = 'https://api.paystack.co/transaction/verify/'.$reference;
@@ -72,6 +73,18 @@ function easy_wp_voting_ajax()
               'success' => true,
               'message' => "Thanks for voting"
             );
+          
+            $from = "mujhtech@gmail.com";
+            $title = "Easy Wp Voting With Payment";
+            $headers = "From: $title <$from> \r\n";
+			$headers .= "Reply-To: $title <$from> \r\n";
+			$headers .= "MIME-Version: 1.0\r\n";
+			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+			$message = "Thanks for voting, we appreciate your votes";
+
+			mail($to, $subject, $message, $headers);
+          
             return wp_send_json( $result );
       }
 
