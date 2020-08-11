@@ -50,7 +50,7 @@ $loop = new WP_Query( $args );
             
             <div class="product-back">
                 <div class="shadow"></div>
-                <form class="easy-wp-voting-form" action="#" method="post" id="easy-wp-voting-form" data-form="<?php print get_the_ID(); ?>" data-url="<?php echo admin_url('admin-ajax.php'); ?>">
+                <form class="easy-wp-voting-form" onsubmit="return easyWpVotingForm(event, <?php print get_the_ID(); ?>)" action="#" method="post" id="easy-wp-voting-form" data-form="<?php print get_the_ID(); ?>" data-url="<?php echo admin_url('admin-ajax.php'); ?>">
                     <input type="email" name="email" id="email" placeholder="Enter your email" class="easy-wp-voting-form-input">
                     <input type="number" name="quantity" id="quantity" placeholder="Number of vote" class="easy-wp-voting-form-input"/>
                     <input type="text" name="amount" id="amount" placeholder="Amount" class="easy-wp-voting-form-input"/>
@@ -72,3 +72,11 @@ $loop = new WP_Query( $args );
 wp_reset_postdata(); 
 
 ?>
+<script>
+
+    function easyWpVotingForm(event, formid){
+        event.preventDefault();
+        alert(formid);
+    }
+
+</script>

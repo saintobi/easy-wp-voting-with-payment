@@ -1,11 +1,5 @@
 $(document).ready(function(){
 
-	$("#easy-wp-voting-form").submit(function(event){
-        event.preventDefault();
-        var quantity = $(this).closest("form").find('[name="quantity"]').val();
-        alert(quantity);
-    });
-
 	$(".largeGrid").click(function(){											
     $(this).find('a').addClass('active');
     $('.smallGrid a').removeClass('active');
