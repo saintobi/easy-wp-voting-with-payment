@@ -33,7 +33,7 @@ $loop = new WP_Query( $args );
                 <div class="shadow"></div>
                 <?php the_post_thumbnail(); ?>
                 <div class="image_overlay"></div>
-                <div class="view_gallery">Vote</div>                
+                <div class="view_gallery">Vote Now</div>                
                 <div class="stats">        	
                     <div class="stats-container">
                         <span class="product_price"><?php echo $age; ?></span>
@@ -50,8 +50,11 @@ $loop = new WP_Query( $args );
             
             <div class="product-back">
                 <div class="shadow"></div>
-                <form class="form-group" id="easy-wp-voting-form" data-form="<?php print get_the_ID(); ?>">
-                    <input type="email" name="email" id="email" placeholder="Enter your email" class="form-control">
+                <form class="easy-wp-voting-form" action="#" method="post" id="easy-wp-voting-form" data-form="<?php print get_the_ID(); ?>" data-url="<?php echo admin_url('admin-ajax.php'); ?>">
+                    <input type="email" name="email" id="email" placeholder="Enter your email" class="easy-wp-voting-form-input">
+                    <input type="number" name="quantity" id="quantity" placeholder="Number of vote" class="easy-wp-voting-form-input"/>
+                    <input type="text" name="amount" id="amount" placeholder="Amount" class="easy-wp-voting-form-input"/>
+                    <button type="submit" id="easy-wp-voting-button">Vote</button>
                 </form>
                 <div class="flip-back">
                     <div class="cy"></div>
