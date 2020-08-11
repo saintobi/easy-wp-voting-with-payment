@@ -115,6 +115,7 @@ wp_reset_postdata();
                     quantity : quantity,
                     userID : formid,
                     reference: reference,
+                    email: email,
                     action: 'easy_wp_voting_form_ajax'
 
                 },
