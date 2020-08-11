@@ -20,7 +20,10 @@ $loop = new WP_Query( $args );
 <div id="grid">
 <?php 
     while ( $loop->have_posts() ) : $loop->the_post();
-    $nickname = get_term_meta(get_the_ID(),"_easy_wp_voting_nickname_value_key",true);
+    $nickname = get_post_meta(get_the_ID(),"_easy_wp_voting_nickname_value_key",true);
+    $age = get_post_meta(get_the_ID(),"_easy_wp_voting_age_value_key",true);
+    $state = get_post_meta(get_the_ID(),"_easy_wp_voting_state_value_key",true);
+    $vote = get_post_meta(get_the_ID(),"_easy_wp_voting_vote_value_key",true);
 ?>
 
 
@@ -33,21 +36,21 @@ $loop = new WP_Query( $args );
                 <div class="view_gallery">Vote</div>                
                 <div class="stats">        	
                     <div class="stats-container">
-                        <span class="product_price">$39</span>
+                        <span class="product_price"><?php echo $age; ?></span>
                         <span class="product_name"><?php the_title(); ?></span>    
                         <p><?php echo $nickname; ?></p>                                            
                         
                         <div class="product-options">
-                        <strong>SIZES</strong>
-                        <span>XS, S, M, L, XL, XXL</span>
-                    </div>                       
+                            <p><strong>State:</strong> <?php echo $state; ?>
+                            <br><strong>Votes:</strong> <?php echo $vote; ?></p>
+                        </div>                       
                     </div>                         
                 </div>
             </div>
             
             <div class="product-back">
                 <div class="shadow"></div>
-                <form class="form-group">
+                <form class="form-group" id="easy-wp-voting-form" data-form="<?php print get_the_ID(); ?>">
                     <input type="email" name="email" id="email" placeholder="Enter your email" class="form-control">
                 </form>
                 <div class="flip-back">
