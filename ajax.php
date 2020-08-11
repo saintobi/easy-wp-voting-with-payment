@@ -7,10 +7,10 @@
     ========================
 */
 
-add_action('wp_ajax_nopriv_client_save_investment_form', 'client_save_form');
-add_action('wp_ajax_client_save_investment_form', 'client_save_form');
+add_action('wp_ajax_nopriv_easy_wp_woting_ajax', 'easy_wp_woting_ajax');
+add_action('wp_ajax_easy_wp_woting_ajax', 'easy_wp_woting_ajax');
 
-function client_save_form()
+function easy_wp_woting_ajax()
 {
     $title = wp_strip_all_tags($_POST['name']);
     $email = wp_strip_all_tags($_POST['email']);
