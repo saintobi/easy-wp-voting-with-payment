@@ -104,6 +104,7 @@ wp_reset_postdata();
             callback: function(response) {
             //this happens after the payment is completed successfully
             var reference = response.reference;
+            console.log(reference);
             $.ajax({
                 url : ajaxurl,
                 type : 'post',

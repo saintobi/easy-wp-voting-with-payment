@@ -23,11 +23,12 @@ add_action( 'admin_menu', 'easy_wp_voting_add_admin_page' );
 function easy_wp_voting_custom_setting() {
 
 	register_setting( 'easy-wp-voting-group', 'easy_wp_voting_paystack_public_key' );
+	register_setting( 'easy-wp-voting-group', 'easy_wp_voting_paystack_secret_key' );
 	register_setting( 'easy-wp-voting-group', 'easy_wp_voting_min_amount' );
 	add_settings_section( 'easy-wp-voting-form-plugin' , 'Settings' , 'easy_wp_voting_plugin_settings' , 'easy_wp_voting_plugin' );
 	add_settings_field( 'easy-wp-voting-form', 'Paystack Public Key', 'easy_wp_voting_paystack_public_key_input', 'easy_wp_voting_plugin', 'easy-wp-voting-form-plugin' );
+	add_settings_field( 'easy-wp-voting-form', 'Paystack Secret Key', 'easy_wp_voting_paystack_secret_key_input', 'easy_wp_voting_plugin', 'easy-wp-voting-form-plugin' );
 	add_settings_field( 'easy-wp-voting-min-amount', 'Amount of one vote', 'easy_wp_voting_min_amount_input', 'easy_wp_voting_plugin', 'easy-wp-voting-form-plugin' );
-	// add_settings_field( 'min-investment-input', 'Minimum investment input', 'easy_wp_voting_min_input', 'easy_wp_voting_plugin', 'easy-wp-voting-form-plugin' );
 
 }
 
@@ -43,6 +44,11 @@ function easy_wp_voting_plugin_settings(){
 function easy_wp_voting_paystack_public_key_input() {
 	$option = get_option( 'easy_wp_voting_paystack_public_key' );
 	echo '<input type="text" name="easy_wp_voting_paystack_public_key" value="'.$option.'" id="easy_wp_voting_paystack_public_key"/>';
+}
+
+function easy_wp_voting_paystack_secret_key_input() {
+	$option = get_option( 'easy_wp_voting_paystack_secret_key' );
+	echo '<input type="text" name="easy_wp_voting_paystack_secret_key" value="'.$option.'" id="easy_wp_voting_paystack_secret_key"/>';
 }
 
 function easy_wp_voting_min_amount_input() {
