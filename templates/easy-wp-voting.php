@@ -98,10 +98,8 @@ wp_reset_postdata();
         var handler = PaystackPop.setup({
             key: '<?php echo get_option( 'easy_wp_voting_paystack_public_key' ); ?>', // Replace with your public key
             email: email,
-            amount: total * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+            amount: amount * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
             currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
-            //firstname: document.getElementById('first-name').value,
-            //lastname: document.getElementById('first-name').value,
             reference: 'Easy Wp Voting', // Replace with a reference you generated
             callback: function(response) {
             //this happens after the payment is completed successfully
