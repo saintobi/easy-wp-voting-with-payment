@@ -52,12 +52,12 @@ $loop = new WP_Query( $args );
                 <div class="shadow"></div>
                 <form class="easy-wp-voting-form" onsubmit="return easyWpVotingForm(event, <?php print get_the_ID(); ?>)" action="#" method="post" id="easy-wp-voting-form-<?php print get_the_ID(); ?>" data-form="<?php print get_the_ID(); ?>" data-url="<?php echo admin_url('admin-ajax.php'); ?>">
                     <input type="email" name="email" id="email-<?php print get_the_ID(); ?>" placeholder="Enter your email" class="easy-wp-voting-form-input">
-                    <input type="number" name="quantity" onkeyup="return updateAmount(event, <?php print get_the_ID(); ?>)" id="quantity-<?php print get_the_ID(); ?>" value="1" class="easy-wp-voting-form-input"/>
+                    <input type="number" name="quantity" onkeyup="return updateAmount(event, <?php print get_the_ID(); ?>)" id="quantity-<?php print get_the_ID(); ?>" placeholder="1-1000" class="easy-wp-voting-form-input"/>
                     <input type="text" name="amount" id="amount-<?php print get_the_ID(); ?>" placeholder="Amount" class="easy-wp-voting-form-input" readonly/>
                     <button type="submit" id="easy-wp-voting-button">Vote</button>
                 </form>
-                <small class="text-success form-control-msg easy-wp-voting-form-success-<?php print get_the_ID(); ?>">Vote Successfully submitted, thank you!</small>
-                <small class="text-danger form-control-msg easy-wp-voting-form-error-<?php print get_the_ID(); ?>">There was a problem with the Inquiry Form, please try again!</small>
+                <small class="text-success form-control-msg easy-wp-voting-form-success-<?php print get_the_ID(); ?>" style="display:none; margin:0 auto 100px">Vote Successfully submitted, thank you!</small>
+                <small class="text-danger form-control-msg easy-wp-voting-form-error-<?php print get_the_ID(); ?>" style="display:none; margin:0 auto 100px">There was a problem with the Inquiry Form, please try again!</small>
                 <div class="flip-back">
                     <div class="cy"></div>
                     <div class="cx"></div>
@@ -104,6 +104,7 @@ wp_reset_postdata();
             callback: function(response) {
             //this happens after the payment is completed successfully
             var reference = response.reference;
+            console.log(reference);
             $.ajax({
                 url : ajaxurl,
                 type : 'post',
@@ -121,7 +122,7 @@ wp_reset_postdata();
                         
                         if(response.success == true){
                             $('#easy-wp-voting-form-'+formid).css('display', 'none');
-                            $('.easy-wp-voting-form-success-'+formid).css({'display':'block', 'margin':'0 auto 100px'})
+                            $('.easy-wp-voting-form-success-'+formid).css({'display':'block'})
                         } else {
                             console.log(response.message);
                             alert(response.message);
