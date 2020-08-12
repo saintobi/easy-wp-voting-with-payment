@@ -18,7 +18,6 @@ function easy_wp_voting_ajax()
     $email = wp_strip_all_tags($_POST['email']);
 
 //The parameter after verify/ is the transaction reference to be verified
-    $url = 'https://api.paystack.co/transaction/verify/'.$reference;
     $ch = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_URL => "https://api.paystack.co/transaction/verify/".$reference,
@@ -29,7 +28,7 @@ function easy_wp_voting_ajax()
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => "GET",
       CURLOPT_HTTPHEADER => array(
-        "Authorization: Bearer ".get_option( 'easy_wp_voting_paystack_public_key' ),
+        "Authorization: Bearer ".get_option( 'easy_wp_voting_paystack_secret_key' ),
         "Cache-Control: no-cache",
       ),
     ));
