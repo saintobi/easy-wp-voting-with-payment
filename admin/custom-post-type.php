@@ -142,8 +142,10 @@ function easy_wp_voting_vote_callback( $post ){
 	wp_nonce_field( 'easy_wp_voting_save_vote_data', 'easy_wp_voting_vote_meta_box_nonce' );
 	$value = get_post_meta( $post->ID, '_easy_wp_voting_vote_value_key', true );
 
+	$final_value = (!empty($value)) ? $value : 0;
+
 	echo '<label for="easy_wp_voting_vote_field"> Number of Votes </label><br><br> ';
-	echo '<input type="number" name="easy_wp_voting_vote_field" id="easy_wp_voting_vote_field" value="'. esc_attr( $value ).'" size="25"/>';
+	echo '<input type="number" name="easy_wp_voting_vote_field" id="easy_wp_voting_vote_field" readonly value="'. esc_attr( $final_value ).'" size="25"/>';
 }
 
 function easy_wp_voting_age_callback( $post ){

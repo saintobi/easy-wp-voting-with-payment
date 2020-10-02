@@ -6,9 +6,11 @@
 /*
 Plugin Name: Easy WP Voting With Payment
 Plugin URI: https://github.com/Mujhtech/easy-wp-voting-with-payment
-Description: This plugin is an easy voting system plugin integrated with payment system
+Description: Easy WP Voting With Payment allows you to create a simple voting system with payment method
 Author: Mujhtech Mujeeb Muhideen
 Version: 1.0.0
+License: GPL-2.0+
+License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 Author URI: https://github.com/Mujhtech/
 */
 
@@ -43,12 +45,12 @@ add_shortcode( 'easy_wp_voting', 'easy_wp_voting_shortcode' );
 
 
 function easy_wp_voting_load_scripts(){
-    wp_enqueue_style( 'owl-carousel', plugin_dir_url(__FILE__) . 'asset/css/style.css', array(), '1.0.0', 'all' );
+    wp_enqueue_style( 'owl-carousel', plugin_dir_url(__FILE__) . 'assets/css/style.css', array(), '1.0.0', 'all' );
   
     wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery' , plugin_dir_url(__FILE__) . 'asset/js/jquery.min.js', false, '1.11.3', true );
+    wp_register_script( 'jquery' , plugin_dir_url(__FILE__) . 'assets/js/jquery.min.js', false, '1.11.3', true );
     wp_enqueue_script( 'jquery' );
-    wp_register_script( 'scriptjs', plugin_dir_url(__FILE__) . 'asset/js/script.js', array('jquery'), '1.0.0', true );
+    wp_register_script( 'scriptjs', plugin_dir_url(__FILE__) . 'assets/js/script.js', array('jquery'), '1.0.0', true );
     wp_enqueue_script( 'scriptjs' );
   
   }

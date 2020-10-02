@@ -28,7 +28,7 @@ function easy_wp_voting_custom_setting() {
 	add_settings_section( 'easy-wp-voting-form-plugin' , 'Settings' , 'easy_wp_voting_plugin_settings' , 'easy_wp_voting_plugin' );
 	add_settings_field( 'easy-wp-voting-public-key', 'Paystack Public Key', 'easy_wp_voting_paystack_public_key_input', 'easy_wp_voting_plugin', 'easy-wp-voting-form-plugin' );
 	add_settings_field( 'easy-wp-voting-secret-key', 'Paystack Secret Key', 'easy_wp_voting_paystack_secret_key_input', 'easy_wp_voting_plugin', 'easy-wp-voting-form-plugin' );
-	add_settings_field( 'easy-wp-voting-min-amount', 'Amount of one vote', 'easy_wp_voting_min_amount_input', 'easy_wp_voting_plugin', 'easy-wp-voting-form-plugin' );
+	add_settings_field( 'easy-wp-voting-min-amount', 'Amount for one vote', 'easy_wp_voting_min_amount_input', 'easy_wp_voting_plugin', 'easy-wp-voting-form-plugin' );
 
 }
 
