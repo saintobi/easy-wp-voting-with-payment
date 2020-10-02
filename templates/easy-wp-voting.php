@@ -6,7 +6,7 @@
  */
 
 $args = array(  
-    'post_type' => 'easy-wp-voting',
+    'post_type' => 'ewvwp',
     'post_status' => 'publish',
     'posts_per_page' => 8, 
     'orderby' => 'title', 
@@ -20,10 +20,10 @@ $loop = new WP_Query( $args );
 <div id="grid">
 <?php 
     while ( $loop->have_posts() ) : $loop->the_post();
-    $nickname = get_post_meta(get_the_ID(),"_easy_wp_voting_nickname_value_key",true);
-    $age = get_post_meta(get_the_ID(),"_easy_wp_voting_age_value_key",true);
-    $state = get_post_meta(get_the_ID(),"_easy_wp_voting_state_value_key",true);
-    $vote = get_post_meta(get_the_ID(),"_easy_wp_voting_vote_value_key",true);
+    $nickname = get_post_meta(get_the_ID(),"_ewvwp_nickname_value_key",true);
+    $age = get_post_meta(get_the_ID(),"_ewvwp_age_value_key",true);
+    $state = get_post_meta(get_the_ID(),"_ewvwp_state_value_key",true);
+    $vote = get_post_meta(get_the_ID(),"_ewvwp_vote_value_key",true);
 ?>
 
 
@@ -74,7 +74,6 @@ $loop = new WP_Query( $args );
 wp_reset_postdata(); 
 
 ?>
- <script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
 
     function updateAmount(event, formid){
@@ -82,7 +81,7 @@ wp_reset_postdata();
         var amount = $('#amount-'+formid).val();
         var quantity = event.target.value;
 
-        var total = quantity * <?php echo get_option('easy_wp_voting_min_amount'); ?>;
+        var total = quantity * <?php echo get_option('ewvwp_min_amount'); ?>;
         $("#amount-"+formid).val(total);
 
     }
@@ -96,11 +95,11 @@ wp_reset_postdata();
 
 
         var handler = PaystackPop.setup({
-            key: '<?php echo get_option( 'easy_wp_voting_paystack_public_key' ); ?>', // Replace with your public key
+            key: '<?php echo get_option( 'ewvwp_paystack_public_key' ); ?>', // Replace with your public key
             email: email,
             amount: amount * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
             currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
-            reference: 'Easy Wp Voting', // Replace with a reference you generated
+            reference: 'Easy Wp Voting With Payment', // Replace with a reference you generated
             callback: function(response) {
             //this happens after the payment is completed successfully
             var reference = response.reference;
@@ -115,7 +114,7 @@ wp_reset_postdata();
                     userID : formid,
                     reference: reference,
                     email: email,
-                    action: 'easy_wp_voting_form_ajax'
+                    action: 'ewvwp_form_ajax'
 
                 },
                 success : function( response ){
@@ -124,8 +123,8 @@ wp_reset_postdata();
                             $('#easy-wp-voting-form-'+formid).css('display', 'none');
                             $('.easy-wp-voting-form-success-'+formid).css({'display':'block'})
                         } else {
+                            //console.log(response.message);
                             console.log(response.message);
-                            alert(response.message);
                         }
 
                 }
@@ -133,7 +132,7 @@ wp_reset_postdata();
             });
             },
             onClose: function() {
-            alert('Transaction was not completed, window closed.');
+                alert('Transaction was not completed, window closed.');
             },
         });
         handler.openIframe();
