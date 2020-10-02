@@ -1,5 +1,5 @@
 === Easy WP Voting With Payment ===
-Contributors: Mujhtech
+Contributors: mujhtech222
 Donate link: https://mujh.tech
 Tags: paystack, wordpress, vote, payment, mastercard, visa
 Requires at least: 4.7
@@ -66,3 +66,14 @@ You need to open a Paystack merchant account on [Paystack](https://paystack.com)
 
 = 1.0.0 - October 03, 2020 =
 *   First release
+
+== Upgrade Notice ==
+= 1.0.0 - October 03, 2020 =
+*   First release
+
+
+== Screenshots ==
+
+1. Easy WP Voting With Payment Setting Page
+
+2. Easy WP Voting With Payment voting page
