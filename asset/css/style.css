@@ -36,12 +36,9 @@
 #grid-menu li.largeGrid a.active{background-position:-37px -33px;}
  
 
-#grid{	
-	width: auto;
-	position: absolute;
-	left: 200px;
-	height: 1200px;
-	top: 180px;
+#grid{
+	display: flex;
+	flex-wrap: wrap;
 }
 
 #sidebar{

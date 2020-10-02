@@ -9,6 +9,8 @@ Plugin URI: https://github.com/Mujhtech/easy-wp-voting-with-payment
 Description: This plugin is an easy voting system plugin integrated with payment system
 Author: Mujhtech Mujeeb Muhideen
 Version: 1.0.0
+License: GPL-2.0+
+License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 Author URI: https://github.com/Mujhtech/
 */
 
