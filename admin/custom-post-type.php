@@ -69,7 +69,7 @@ function wpse_19240_change_place_labels()
 				'hierarchical'	=>	false,
 				'menu_position'	=>	200,
 				'publicly_queryable' => true,
-				'menu_icon'	=>	'dashicons-email-alt',
+				'menu_icon'	=>	'dashicons-groups',
 				'supports'	=>	array('title', 'thumbnail')
 		);
 

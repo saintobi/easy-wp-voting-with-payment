@@ -39,9 +39,13 @@ add_shortcode( 'ewvwp_plugin', 'ewvwp_shortcode' );
 
 function ewvwp_scripts(){
 
-    wp_enqueue_style( 'ewvwp-owl-carousel', plugin_dir_url(__FILE__) . 'assets/css/style.css', array(), '1.0.0', 'all' );
+    wp_enqueue_style( 'ewvwp-owl-carousel-css', plugin_dir_url(__FILE__) . 'assets/css/style.css', array(), '1.0.0', 'all' );
+
+    wp_enqueue_style( 'ewvwp-sweetalert-css', '//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css', array(), '1.0.0', 'all' );
   
   	wp_enqueue_script( 'ewvwp-paystack-js', 'https://js.paystack.co/v1/inline.js', array(), '1.0' );
+
+  	wp_enqueue_script( 'ewvwp-sweetalert-js', '//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js', array(), '1.0' );
 
   	wp_enqueue_script( 'ewvwp-js', plugin_dir_url(__FILE__) . 'assets/js/script.js', array('jquery'), '1.0.0', true );
   

@@ -93,6 +93,18 @@ wp_reset_postdata();
         var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
         var email = $("#email-"+formid).val();
 
+        if (email == "" || quantity == "" ) {
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Fill the necessary detail',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+            return true;
+        }
+
 
         var handler = PaystackPop.setup({
             key: '<?php echo get_option( 'ewvwp_paystack_public_key' ); ?>', // Replace with your public key
@@ -120,11 +132,24 @@ wp_reset_postdata();
                 success : function( response ){
                         
                         if(response.success == true){
-                            $('#easy-wp-voting-form-'+formid).css('display', 'none');
-                            $('.easy-wp-voting-form-success-'+formid).css({'display':'block'})
+                            //$('#easy-wp-voting-form-'+formid).css('display', 'none');
+                            //$('.easy-wp-voting-form-success-'+formid).css({'display':'block'})
+
+                            Swal.fire({
+                              icon: 'success',
+                              title: response.message,
+                              showConfirmButton: false,
+                              timer: 1500
+                            })
+                            setTimeout(window.location.reload(), 3000);
                         } else {
                             //console.log(response.message);
-                            console.log(response.message);
+                            Swal.fire({
+                              icon: 'error',
+                              title: response.message,
+                              showConfirmButton: false,
+                              timer: 1500
+                            })
                         }
 
                 }
@@ -132,7 +157,13 @@ wp_reset_postdata();
             });
             },
             onClose: function() {
-                alert('Transaction was not completed, window closed.');
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Transaction was not completed, window closed.',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                //alert('Transaction was not completed, window closed.');
             },
         });
         handler.openIframe();
