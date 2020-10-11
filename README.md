@@ -1,4 +1,4 @@
-=== Easy WP Voting With Payment ===
+## Easy WP Voting With Payment 
 Contributors: mujhtech222
 Donate link: https://mujh.tech
 Tags: paystack, wordpress, vote, payment, mastercard, visa
@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Easy WP Voting With Payment allows you to create a simple voting system with payment method
 
-== Description ==
+## Description
 
 This is a Easy WP Voting With Payment.
 
@@ -23,13 +23,13 @@ Easy WP Voting With Payment allows you to accept payment on your voting system u
 
 With this Easy WP Voting With Payment plugin, you will be able to accept the following payment methods in your website
 
-= Note =
+# Note 
 
 This plugin is meant to be used by merchants in Nigeria.
 
-== Installation ==
+## Installation 
 
-= Automatic Installation =
+### Automatic Installation
 * 	Login to your WordPress Admin area
 * 	Go to "Plugins > Add New" from the left hand menu
 * 	In the search box type __Easy WP Voting With Payment__
@@ -38,7 +38,7 @@ This plugin is meant to be used by merchants in Nigeria.
 *	After installation, activate the plugin.
 * 	Open the settings page for Easy WP Voting With Payment and configure your voting system.
 
-= Manual Installation =
+### Manual Installation 
 1. 	Download the plugin zip file
 2. 	Login to your WordPress Admin. Click on "Plugins > Add New" from the left hand menu.
 3.  Click on the "Upload" option, then click "Choose File" to select the zip file from your computer. Once selected, press "OK" and press the "Install Now" button.
@@ -47,7 +47,7 @@ This plugin is meant to be used by merchants in Nigeria.
 
 
 
-= Configure the plugin =
+## Configure the plugin 
 To configure the plugin, go to __Easy WP Voting With Payment__ then click __settings__ .
 
 * __Amount of one vote__ - Enter amount for one vote in NGN.
@@ -56,24 +56,8 @@ To configure the plugin, go to __Easy WP Voting With Payment__ then click __sett
 * Click on __Save Changes__ for the changes you made to be effected.
 
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions
 
-= What Do I Need To Use The Plugin =
+### What Do I Need To Use The Plugin
 
 You need to open a Paystack merchant account on [Paystack](https://paystack.com)
-
-== Changelog ==
-
-= 1.0.0 - October 03, 2020 =
-*   First release
-
-== Upgrade Notice ==
-= 1.0.0 - October 03, 2020 =
-*   First release
-
-
-== Screenshots ==
-
-1. Easy WP Voting With Payment Setting Page
-
-2. Easy WP Voting With Payment voting page
