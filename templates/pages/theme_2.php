@@ -151,11 +151,10 @@
     </style>
 
 
-    <section class="tp-search-bar">
-        <!-- Add an Ajax search Functionality Here so people can search for participants  -->
+    <!--<section class="tp-search-bar">
         <input type="text" placeholder="Search For a Participant...">
         <button>Search</button>
-    </section>
+    </section>-->
 
     <section class="tp-vote-container">
     
@@ -173,6 +172,12 @@
         <div class="vote-item">
             <?php the_post_thumbnail(); ?>
             <span><?php the_title(); ?></span>
+            <?php if(get_option('ewvwp_display_state') == 1): ?>
+            <span>State: <?php echo $state; ?></span>
+            <?php endif; ?>
+            <?php if(get_option('ewvwp_display_vote') == 1): ?>
+            <span>Votes: <?php echo $vote; ?></span>
+            <?php endif; ?>
             <a class="ewvwp-trigger" id="vote-<?php print get_the_ID(); ?>" onclick="return easyWVWPMForm(<?php print get_the_ID(); ?>)">Vote Now</a>
         </div>
 
@@ -184,10 +189,11 @@
         <div class="ewvwp-modal-content">
             <span class="ewvwp-close-button">&times;</span>
             <div>
-                <form method="post" action="#">
-                    <input placeholder="Enter your Email" type="text">
-                    <input type="number" placeholder="Amount">
-                    <input value="10" readonly type="text">
+                <form method="post" action="#" id="ewvwp-theme-2-form" onsubmit="return easyWVWPMFormSubmit(event)">
+                    <input type="hidden" name="vote-id" value="" id="vote-id">
+                    <input placeholder="Enter your Email" id="ewvwp-email" type="text">
+                    <input type="number" id="ewvwp-number-of-vote" onkeyup="return updateAmount(event)" placeholder="Number of Votes">
+                    <input type="number" id="ewvwp-amount-of-vote" readonly placeholder="Amount">
                     <input type="submit" name="vote" value="Vote">
                 </form>
             </div>
@@ -198,6 +204,7 @@
         var modal = document.querySelector(".ewvwp-modal");
         var trigger = document.querySelector(".ewvwp-trigger");
         var closeButton = document.querySelector(".ewvwp-close-button");
+        var numberOfVote = document.getElementById("ewvwp-number-of-vote");
 
         function toggleModal() {
             modal.classList.toggle("ewvwp-show-modal");
@@ -211,11 +218,78 @@
 
         function easyWVWPMForm(id){
             toggleModal();
+            document.getElementById("vote-id").value = id;
         }
 
+
+        function easyWVWPMFormSubmit(event){
+            event.preventDefault();
+            var id = document.getElementById("vote-id").value;
+            var quantity = document.getElementById("ewvwp-number-of-vote").value;
+            var amount = document.getElementById("ewvwp-amount-of-vote").value;
+            var email = document.getElementById("ewvwp-email").value;
+            var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+
+            if (email == "" || quantity == "" ) {
+
+                alert("Fill the necessary details");
+
+                return;
+            }
+            
+            var handler = PaystackPop.setup({
+                key: '<?php echo get_option( 'ewvwp_paystack_public_key' ); ?>', // Replace with your public key
+                email: email,
+                amount: amount * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+                currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
+                reference: 'Easy Wp Voting With Payment', // Replace with a reference you generated
+                callback: function(response) {
+                //this happens after the payment is completed successfully
+                var reference = response.reference;
+                console.log(reference);
+                $.ajax({
+                    url : ajaxurl,
+                    type : 'post',
+                    dataType: 'json',
+                    data : {
+
+                        quantity : quantity,
+                        userID : id,
+                        reference: reference,
+                        email: email,
+                        action: 'ewvwp_form_ajax'
+
+                    },
+                    success : function( response ){
+                            
+                        if(response.success == true){
+                            document.getElementById("ewvwp-theme-2-form").reset();
+                            alert(response.message);
+                            setTimeout(window.location.reload(), 3000);
+                        } else {
+                            //console.log(response.message);
+                            alert(response.message);
+                        }
+                    }
+
+                });
+                },
+                onClose: function() {
+                    alert('Transaction was not completed, window closed.');
+                },
+            });
+            handler.openIframe();
+        } 
+
+        function updateAmount(event){
+            var quantity = event.target.value;
+
+            var total = quantity * <?php echo get_option('ewvwp_min_amount'); ?>;
+            document.getElementById("ewvwp-amount-of-vote").value = total;
+        }
         //trigger.addEventListener("click", toggleModal);
         closeButton.addEventListener("click", toggleModal);
-        //window.addEventListener("click", windowOnClick);
+        window.addEventListener("click", windowOnClick);
 
     </script>
 <?php

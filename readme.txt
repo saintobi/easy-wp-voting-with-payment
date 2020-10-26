@@ -73,12 +73,16 @@ You need to open a Paystack merchant account on [Paystack](https://paystack.com)
 *	Choose to display vote and state count public
 = 1.6.0 - October 11, 2020 =
 *   Fixed css issues
+= 2.0.0 - October 26, 2020 =
+*   Add contest category
 
 == Upgrade Notice ==
 = 1.0.0 - October 03, 2020 =
 *   First release
 = 1.5.0 - October 11, 2020 =
 *   Fixed some issues
+= 2.0.0 - October 11, 2020 =
+*   Add contest category
 
 
 == Screenshots ==
