@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Easy_WP_Voting_With_Payment
- * @version 1.5.0
+ * @version 2.1.0
  */
 /*
 Plugin Name: Easy WP Voting With Payment
 Plugin URI: https://github.com/Mujhtech/easy-wp-voting-with-payment
 Description: Easy WP Voting With Payment allows you to create a simple voting system with payment method
 Author: Mujhtech Mujeeb Muhideen
-Version: 1.6.0
+Version: 2.1.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 Author URI: https://github.com/Mujhtech/
@@ -56,7 +56,7 @@ require plugin_dir_path(__FILE__) . 'admin/custom-post-type.php';
 function ewvwp_shortcode( $atts, $content = null ){
 
 	extract(shortcode_atts(
-		array( 'display' => 'all' ),
+		array( 'contest' => 'all' ),
 		$atts,
 		'ewvwp_plugin'
 	));

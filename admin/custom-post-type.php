@@ -2,13 +2,16 @@
 
 /**
  * @package Easy_WP_Voting_With_Payment
- * @version 1.0.0
+ * @version 2.1.0
  */
 
 @ob_start();
 add_action( 'init', 'ewvwp_custom_post_type' );
+add_action( 'init', 'tr_create_my_taxonomy' );
 add_filter( 'manage_ewvwp_posts_columns', 'ewvwp_set_columns_name' );
+add_filter("manage_edit-ewvwp-category_columns", 'ewvwp_taxonomies_columns'); 
 add_action( 'manage_ewvwp_posts_custom_column', 'ewvwp_custom_columns', 10, 2 );
+add_filter("manage_ewvwp-category_custom_column", 'ewvwp_manage_taxonomies_columns', 10, 3);
 add_action( 'add_meta_boxes', 'ewvwp_add_meta_box' );
 add_action( 'save_post', 'ewvwp_save_nickname_data' );
 add_action( 'save_post', 'ewvwp_save_age_data' );
@@ -18,7 +21,57 @@ add_action( 'save_post', 'ewvwp_save_vote_data' );
 
 add_filter('gettext','custom_enter_title');
 
-add_action( 'wp_loaded', 'wpse_19240_change_place_labels', 20 );
+add_action( 'wp_loaded', 'ewvwp_wpse_19240_change_place_labels', 20 );
+
+function tr_create_my_taxonomy() {
+	$labels = array(
+         'name'              => __( 'Contest Categories'),
+         'singular_name'     => __( 'Contest Category'),
+         'search_items'      => __( 'Search Contests' ),
+         'all_items'         => __( 'All Contests' ),
+         'parent_item'       => __( 'Parent Contest' ),
+         'parent_item_colon' => __( 'Parent Contest:' ),
+         'edit_item'         => __( 'Edit Contest' ),
+         'update_item'       => __( 'Update Contest' ),
+         'add_new_item'      => __( 'Add New Contest' ),
+         'new_item_name'     => __( 'New Contest Name' ),
+         'menu_name'         => __( 'Contest Categories' ),
+     );
+     $args   = array(
+         'hierarchical'      => true, // make it hierarchical (like categories)
+         'labels'            => $labels,
+         'show_ui'           => true,
+         'show_admin_column' => true,
+         'query_var'         => true,
+         'rewrite'           => [ 'slug' => 'ewvwp-category' ],
+     );
+     register_taxonomy( 'ewvwp-category', [ 'ewvwp' ], $args );
+}
+
+ 
+function ewvwp_taxonomies_columns($theme_columns) {
+    $new_columns = array(
+        'cb' => '<input type="checkbox" />',
+        'name' => __('Contest'),
+        'shortcode' => __('Shortcode'),
+        'description' => __('Description'),
+        'posts' => __('Candidates')
+        );
+    return $new_columns;
+}
+
+ 
+function ewvwp_manage_taxonomies_columns($out, $column_name, $theme_id) {
+    switch ($column_name) {
+        case 'shortcode':
+            $out .= '[ewvwp_plugin contest="'.$theme_id.'"]'; 
+            break;
+ 
+        default:
+            break;
+    }
+    return $out;    
+}
 
 function custom_enter_title( $input ) {
 
@@ -31,7 +84,7 @@ function custom_enter_title( $input ) {
 }
 
 
-function wpse_19240_change_place_labels()
+function ewvwp_wpse_19240_change_place_labels()
 {
     $p_object = get_post_type_object( 'ewvwp' );
 
@@ -55,6 +108,7 @@ function wpse_19240_change_place_labels()
 
 	function ewvwp_custom_post_type(){
 		$labels = array(
+				'taxonomies' => 'ewvwp-category',
 				'name'				=>	'Easy WP Voting With Payment',
 				'singular_name'		=>	'Easy WP Voting With Payment',
 				'menu_name'			=>	'Easy WP Voting With Payments',
@@ -85,6 +139,7 @@ function wpse_19240_change_place_labels()
 		$clientColumns['age'] = 'Age';
 		$clientColumns['occupation'] = 'Occupation';
 		$clientColumns['votes'] = 'Number of votes';
+		$clientColumns['taxonomy'] = 'Contest Category';
 		return $clientColumns;
 
 	}
@@ -116,6 +171,16 @@ function ewvwp_custom_columns( $columns, $post_id ) {
 		case 'occupation':
 			$value = get_post_meta( $post_id, '_ewvwp_occupation_value_key', true );
 			echo '<strong>'.$value.'</strong>';
+			break;
+
+		case 'taxonomy':
+			$terms = get_the_terms( $post_id, 'ewvwp-category' );
+			$draught_links = array();
+		    foreach ( $terms as $term ) {
+		        $draught_links[] = $term->name;
+		    }                  
+		    $on_draught = join( ", ", $draught_links );
+		    printf($on_draught);
 			break;
 	}
 
