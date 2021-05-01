@@ -23,6 +23,39 @@ add_filter('gettext','custom_enter_title');
 
 add_action( 'wp_loaded', 'ewvwp_wpse_19240_change_place_labels', 20 );
 
+add_filter('post_updated_messages', 'ewvwp_updated_messages');
+
+
+function ewvwp_updated_messages( $messages ) {
+	global $post, $post_ID;
+
+	$messages['ewvwp'] = array(
+    0 => '', // Unused. Messages start at index 1.
+    1 => sprintf( __('Candidate updated.') ),
+    //1 => sprintf( __('Candidate updated. <a href="%s">View Candidate</a>'), esc_url( get_permalink($post_ID) ) ),
+    2 => __('Custom field updated.'),
+    3 => __('Custom field deleted.'),
+    4 => __('Candidate updated.'),
+    /* translators: %s: date and time of the revision */
+    5 => isset($_GET['revision']) ? sprintf( __('Candidate restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+    6 => sprintf( __('Candidate published.') ),
+    //6 => sprintf( __('Candidate published. <a href="%s">View Candidate</a>'), esc_url( get_permalink($post_ID) ) ),
+    7 => __('Candidate saved.'),
+    8 => sprintf( __('Candidate submitted.') ),
+    //8 => sprintf( __('Candidate submitted. <a target="_blank" href="%s">Preview Candidate</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+    9 => sprintf( __('Candidate scheduled for: <strong>%1$s</strong>. '),
+      // translators: Publish box date format, see http://php.net/date
+    	date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ) ),
+    //9 => sprintf( __('Candidate scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview Candidate</a>'),
+      // translators: Publish box date format, see http://php.net/date
+      //date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
+    10 => sprintf( __('Candidate draft updated.') ),
+    //10 => sprintf( __('Candidate draft updated. <a target="_blank" href="%s">Preview Candidate</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+);
+
+	return $messages;
+}
+
 function tr_create_my_taxonomy() {
 	$labels = array(
 		'name'              => __( 'Contest Categories'),
@@ -93,14 +126,14 @@ function ewvwp_wpse_19240_change_place_labels()
 
     // see get_post_type_labels()
 	$p_object->labels->add_new            = 'Add Candidate';
-	$p_object->labels->add_new_item       = 'Add new candidate';
-	$p_object->labels->all_items          = 'All candidate';
-	$p_object->labels->edit_item          = 'Edit candidate';
+	$p_object->labels->add_new_item       = 'Add New Candidate';
+	$p_object->labels->all_items          = 'All Candidate';
+	$p_object->labels->edit_item          = 'Edit Candidate';
 	$p_object->labels->new_item           = 'New Candidate';
-	$p_object->labels->not_found          = 'No candidates found';
-	$p_object->labels->not_found_in_trash = 'No candidates found in trash';
-	$p_object->labels->search_items       = 'Search candidates';
-	$p_object->labels->view_item          = 'View candidate';
+	$p_object->labels->not_found          = 'No Candidates found';
+	$p_object->labels->not_found_in_trash = 'No Candidates found in trash';
+	$p_object->labels->search_items       = 'Search Candidates';
+	$p_object->labels->view_item          = 'View Candidate';
 
 	return TRUE;
 }
