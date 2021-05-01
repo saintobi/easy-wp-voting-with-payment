@@ -1,8 +1,14 @@
 <?php
 
+/*
+
+    ========================
+        UNINSTALL FUNCTIONS
+    ========================
+*/
 
 if (! defined('WP_UNINSTALL_PLUGIN') ) {
-    exit;
+	exit;
 }
 
 
@@ -10,12 +16,12 @@ if (! defined('WP_UNINSTALL_PLUGIN') ) {
 $myplugin_cpt_args = array('post_type' => 'ewvwp', 'posts_per_page' => -1);
 $myplugin_cpt_posts = get_posts($myplugin_cpt_args);
 foreach ($myplugin_cpt_posts as $post) {
-    wp_delete_post($post->ID, false);
-    delete_post_meta($post->ID, '_ewvwp_vote_value_key');
-    delete_post_meta($post->ID, '_ewvwp_age_value_key');
-    delete_post_meta($post->ID, '_ewvwp_occupation_value_key');
-    delete_post_meta($post->ID, '_ewvwp_state_value_key');
-    delete_post_meta($post->ID, '_ewvwp_nickname_value_key');
+	wp_delete_post($post->ID, false);
+	delete_post_meta($post->ID, '_ewvwp_vote_value_key');
+	delete_post_meta($post->ID, '_ewvwp_age_value_key');
+	delete_post_meta($post->ID, '_ewvwp_occupation_value_key');
+	delete_post_meta($post->ID, '_ewvwp_state_value_key');
+	delete_post_meta($post->ID, '_ewvwp_nickname_value_key');
 }
 
 
