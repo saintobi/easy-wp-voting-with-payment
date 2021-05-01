@@ -25,19 +25,19 @@ add_action( 'wp_loaded', 'ewvwp_wpse_19240_change_place_labels', 20 );
 
 function tr_create_my_taxonomy() {
 	$labels = array(
-         'name'              => __( 'Contest Categories'),
-         'singular_name'     => __( 'Contest Category'),
-         'search_items'      => __( 'Search Contests' ),
-         'all_items'         => __( 'All Contests' ),
-         'parent_item'       => __( 'Parent Contest' ),
-         'parent_item_colon' => __( 'Parent Contest:' ),
-         'edit_item'         => __( 'Edit Contest' ),
-         'update_item'       => __( 'Update Contest' ),
-         'add_new_item'      => __( 'Add New Contest' ),
-         'new_item_name'     => __( 'New Contest Name' ),
-         'menu_name'         => __( 'Contest Categories' ),
-     );
-     $args   = array(
+		'name'              => __( 'Contest Categories'),
+		'singular_name'     => __( 'Contest Category'),
+		'search_items'      => __( 'Search Contests' ),
+		'all_items'         => __( 'All Contests' ),
+		'parent_item'       => __( 'Parent Contest' ),
+		'parent_item_colon' => __( 'Parent Contest:' ),
+		'edit_item'         => __( 'Edit Contest' ),
+		'update_item'       => __( 'Update Contest' ),
+		'add_new_item'      => __( 'Add New Contest' ),
+		'new_item_name'     => __( 'New Contest Name' ),
+		'menu_name'         => __( 'Contest Categories' ),
+	);
+	$args   = array(
          'hierarchical'      => true, // make it hierarchical (like categories)
          'labels'            => $labels,
          'show_ui'           => true,
@@ -45,143 +45,143 @@ function tr_create_my_taxonomy() {
          'query_var'         => true,
          'rewrite'           => [ 'slug' => 'ewvwp-category' ],
      );
-     register_taxonomy( 'ewvwp-category', [ 'ewvwp' ], $args );
+	register_taxonomy( 'ewvwp-category', [ 'ewvwp' ], $args );
 }
 
- 
+
 function ewvwp_taxonomies_columns($theme_columns) {
-    $new_columns = array(
-        'cb' => '<input type="checkbox" />',
-        'name' => __('Contest'),
-        'shortcode' => __('Shortcode'),
-        'description' => __('Description'),
-        'posts' => __('Candidates')
-        );
-    return $new_columns;
+	$new_columns = array(
+		'cb' => '<input type="checkbox" />',
+		'name' => __('Contest'),
+		'shortcode' => __('Shortcode'),
+		'description' => __('Description'),
+		'posts' => __('Candidates')
+	);
+	return $new_columns;
 }
 
- 
+
 function ewvwp_manage_taxonomies_columns($out, $column_name, $theme_id) {
-    switch ($column_name) {
-        case 'shortcode':
-            $out .= '[ewvwp_plugin contest="'.$theme_id.'"]'; 
-            break;
- 
-        default:
-            break;
-    }
-    return $out;    
+	switch ($column_name) {
+		case 'shortcode':
+		$out .= '[ewvwp_plugin contest="'.$theme_id.'"]'; 
+		break;
+		
+		default:
+		break;
+	}
+	return $out;    
 }
 
 function custom_enter_title( $input ) {
 
-    global $post_type;
+	global $post_type;
 
-    if( is_admin() && 'Add title' == $input && 'ewvwp' == $post_type )
-        return 'Enter Fullname';
+	if( is_admin() && 'Add title' == $input && 'ewvwp' == $post_type )
+		return 'Enter Fullname';
 
-    return $input;
+	return $input;
 }
 
 
 function ewvwp_wpse_19240_change_place_labels()
 {
-    $p_object = get_post_type_object( 'ewvwp' );
+	$p_object = get_post_type_object( 'ewvwp' );
 
-    if ( ! $p_object )
-        return FALSE;
+	if ( ! $p_object )
+		return FALSE;
 
     // see get_post_type_labels()
-    $p_object->labels->add_new            = 'Add Candidate';
-    $p_object->labels->add_new_item       = 'Add new candidate';
-    $p_object->labels->all_items          = 'All candidate';
-    $p_object->labels->edit_item          = 'Edit candidate';
-    $p_object->labels->new_item           = 'New Candidate';
-    $p_object->labels->not_found          = 'No candidates found';
-    $p_object->labels->not_found_in_trash = 'No candidates found in trash';
-    $p_object->labels->search_items       = 'Search candidates';
-    $p_object->labels->view_item          = 'View candidate';
+	$p_object->labels->add_new            = 'Add Candidate';
+	$p_object->labels->add_new_item       = 'Add new candidate';
+	$p_object->labels->all_items          = 'All candidate';
+	$p_object->labels->edit_item          = 'Edit candidate';
+	$p_object->labels->new_item           = 'New Candidate';
+	$p_object->labels->not_found          = 'No candidates found';
+	$p_object->labels->not_found_in_trash = 'No candidates found in trash';
+	$p_object->labels->search_items       = 'Search candidates';
+	$p_object->labels->view_item          = 'View candidate';
 
-    return TRUE;
+	return TRUE;
 }
 
 
-	function ewvwp_custom_post_type(){
-		$labels = array(
-				'taxonomies' => 'ewvwp-category',
-				'name'				=>	'Easy WP Voting With Payment',
-				'singular_name'		=>	'Easy WP Voting With Payment',
-				'menu_name'			=>	'Easy WP Voting With Payments',
-				'name_admin_bar'	=>	'Easy WP Voting With Payment'
-		);
+function ewvwp_custom_post_type(){
+	$labels = array(
+		'taxonomies' => 'ewvwp-category',
+		'name'				=>	'Easy WP Voting With Payment',
+		'singular_name'		=>	'Easy WP Voting With Payment',
+		'menu_name'			=>	'Easy WP Voting With Payments',
+		'name_admin_bar'	=>	'Easy WP Voting With Payment'
+	);
 
-		$args = array(
-				'labels'				=>	$labels,
-				'show_ui'		=>	true,
-				'show_ui_menu'			=>	true,
-				'capability_type'	=>	'post',
-				'hierarchical'	=>	false,
-				'menu_position'	=>	200,
-				'publicly_queryable' => true,
-				'menu_icon'	=>	'dashicons-groups',
-				'supports'	=>	array('title', 'thumbnail')
-		);
+	$args = array(
+		'labels'				=>	$labels,
+		'show_ui'		=>	true,
+		'show_ui_menu'			=>	true,
+		'capability_type'	=>	'post',
+		'hierarchical'	=>	false,
+		'menu_position'	=>	200,
+		'publicly_queryable' => true,
+		'menu_icon'	=>	'dashicons-groups',
+		'supports'	=>	array('title', 'thumbnail')
+	);
 
-		register_post_type( 'ewvwp', $args );
-	}
+	register_post_type( 'ewvwp', $args );
+}
 
-	function ewvwp_set_columns_name( $columns ) {
-		$clientColumns = array();
-		$clientColumns['cb'] = "<input type=\"checkbox\" />";
-		$clientColumns['title'] = 'Full Name';
-		$clientColumns['nickname'] = 'Nick Name';
-		$clientColumns['state'] = 'State';
-		$clientColumns['age'] = 'Age';
-		$clientColumns['occupation'] = 'Occupation';
-		$clientColumns['votes'] = 'Number of votes';
-		$clientColumns['taxonomy'] = 'Contest Category';
-		return $clientColumns;
+function ewvwp_set_columns_name( $columns ) {
+	$clientColumns = array();
+	$clientColumns['cb'] = "<input type=\"checkbox\" />";
+	$clientColumns['title'] = 'Full Name';
+	$clientColumns['nickname'] = 'Nick Name';
+	$clientColumns['state'] = 'State';
+	$clientColumns['age'] = 'Age';
+	$clientColumns['occupation'] = 'Occupation';
+	$clientColumns['votes'] = 'Number of votes';
+	$clientColumns['taxonomy'] = 'Contest Category';
+	return $clientColumns;
 
-	}
+}
 
 
 function ewvwp_custom_columns( $columns, $post_id ) {
 
 	switch ( $columns ) {
 		case 'nickname':
-			$value = get_post_meta( $post_id, '_ewvwp_nickname_value_key', true );
-			echo '<strong>'.$value.'</strong>';
-			break;
+		$value = get_post_meta( $post_id, '_ewvwp_nickname_value_key', true );
+		echo '<strong>'.$value.'</strong>';
+		break;
 
 		case 'state':
-			$value = get_post_meta( $post_id, '_ewvwp_state_value_key', true );
-			echo '<strong>'.$value.'</strong>';
-			break;
+		$value = get_post_meta( $post_id, '_ewvwp_state_value_key', true );
+		echo '<strong>'.$value.'</strong>';
+		break;
 
 		case 'age':
-			$value = get_post_meta( $post_id, '_ewvwp_age_value_key', true );
-			echo '<strong>'.$value.'</strong>';
-			break;
+		$value = get_post_meta( $post_id, '_ewvwp_age_value_key', true );
+		echo '<strong>'.$value.'</strong>';
+		break;
 
 		case 'votes':
-			$value = get_post_meta( $post_id, '_ewvwp_vote_value_key', true );
-			echo '<strong>'.$value.'</strong>';
-			break;
+		$value = get_post_meta( $post_id, '_ewvwp_vote_value_key', true );
+		echo '<strong>'.$value.'</strong>';
+		break;
 
 		case 'occupation':
-			$value = get_post_meta( $post_id, '_ewvwp_occupation_value_key', true );
-			echo '<strong>'.$value.'</strong>';
-			break;
+		$value = get_post_meta( $post_id, '_ewvwp_occupation_value_key', true );
+		echo '<strong>'.$value.'</strong>';
+		break;
 
 		case 'taxonomy':
-			$terms = get_the_terms( $post_id, 'ewvwp-category' );
-			$draught_links = array();
-		    foreach ( $terms as $term ) {
-		        $draught_links[] = $term->name;
-		    }                  
-		    $on_draught = join( ", ", $draught_links );
-		    printf($on_draught);
-			break;
+		$terms = get_the_terms( $post_id, 'ewvwp-category' );
+		$draught_links = array();
+		foreach ( $terms as $term ) {
+			$draught_links[] = $term->name;
+		}                  
+		$on_draught = join( ", ", $draught_links );
+		printf($on_draught);
+		break;
 	}
 
 }
@@ -242,10 +242,10 @@ function ewvwp_occupation_callback( $post ){
 function ewvwp_save_nickname_data( $post_id ){
 
 	if (! isset( $_POST['ewvwp_nickname_meta_box_nonce'] ) ) {
-		 		return;
- 	}
+		return;
+	}
 	if (! wp_verify_nonce( $_POST['ewvwp_nickname_meta_box_nonce'], 'ewvwp_save_nickname_data' ) ) {
-	 		return;
+		return;
 	}
 	if ( define('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
 		return;
@@ -257,19 +257,19 @@ function ewvwp_save_nickname_data( $post_id ){
 		return;
 	}
 
- 	$my_data = sanitize_text_field( $_POST['ewvwp_nickname_field'] );
+	$my_data = sanitize_text_field( $_POST['ewvwp_nickname_field'] );
 
- 	update_post_meta( $post_id , '_ewvwp_nickname_value_key' , $my_data );
+	update_post_meta( $post_id , '_ewvwp_nickname_value_key' , $my_data );
 
 }
 
 function ewvwp_save_age_data( $post_id ){
 
 	if (! isset( $_POST['ewvwp_age_meta_box_nonce'] ) ) {
-		 		return;
- 	}
+		return;
+	}
 	if (! wp_verify_nonce( $_POST['ewvwp_age_meta_box_nonce'], 'ewvwp_save_age_data' ) ) {
-	 		return;
+		return;
 	}
 	if ( define('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
 		return;
@@ -281,19 +281,19 @@ function ewvwp_save_age_data( $post_id ){
 		return;
 	}
 
- 	$my_data = sanitize_text_field( $_POST['ewvwp_age_field'] );
+	$my_data = sanitize_text_field( $_POST['ewvwp_age_field'] );
 
- 	update_post_meta( $post_id , '_ewvwp_age_value_key' , $my_data );
+	update_post_meta( $post_id , '_ewvwp_age_value_key' , $my_data );
 
 }
 
 function ewvwp_save_state_data( $post_id ){
 
 	if (! isset( $_POST['ewvwp_state_meta_box_nonce'] ) ) {
-		 		return;
- 	}
+		return;
+	}
 	if (! wp_verify_nonce( $_POST['ewvwp_state_meta_box_nonce'], 'ewvwp_save_state_data' ) ) {
-	 		return;
+		return;
 	}
 	if ( define('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
 		return;
@@ -305,19 +305,19 @@ function ewvwp_save_state_data( $post_id ){
 		return;
 	}
 
- 	$my_data = sanitize_text_field( $_POST['ewvwp_state_field'] );
+	$my_data = sanitize_text_field( $_POST['ewvwp_state_field'] );
 
- 	update_post_meta( $post_id , '_ewvwp_state_value_key' , $my_data );
+	update_post_meta( $post_id , '_ewvwp_state_value_key' , $my_data );
 
 }
 
 function ewvwp_save_occupation_data( $post_id ){
 
 	if (! isset( $_POST['ewvwp_occupation_meta_box_nonce'] ) ) {
-		 		return;
- 	}
+		return;
+	}
 	if (! wp_verify_nonce( $_POST['ewvwp_occupation_meta_box_nonce'], 'ewvwp_save_occupation_data' ) ) {
-	 		return;
+		return;
 	}
 	if ( define('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
 		return;
@@ -329,19 +329,19 @@ function ewvwp_save_occupation_data( $post_id ){
 		return;
 	}
 
- 	$my_data = sanitize_text_field( $_POST['ewvwp_occupation_field'] );
+	$my_data = sanitize_text_field( $_POST['ewvwp_occupation_field'] );
 
- 	update_post_meta( $post_id , '_ewvwp_occupation_value_key' , $my_data );
+	update_post_meta( $post_id , '_ewvwp_occupation_value_key' , $my_data );
 
 }
 
 function ewvwp_save_vote_data( $post_id ){
 
 	if (! isset( $_POST['ewvwp_vote_meta_box_nonce'] ) ) {
-		 		return;
- 	}
+		return;
+	}
 	if (! wp_verify_nonce( $_POST['ewvwp_vote_meta_box_nonce'], 'ewvwp_save_vote_data' ) ) {
-	 		return;
+		return;
 	}
 	if ( define('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
 		return;
@@ -353,10 +353,9 @@ function ewvwp_save_vote_data( $post_id ){
 		return;
 	}
 
- 	$my_data = sanitize_text_field( $_POST['ewvwp_vote_field'] );
+	$my_data = sanitize_text_field( $_POST['ewvwp_vote_field'] );
 
- 	update_post_meta( $post_id , '_ewvwp_vote_value_key' , $my_data );
+	update_post_meta( $post_id , '_ewvwp_vote_value_key' , $my_data );
 
 }
 
- 
