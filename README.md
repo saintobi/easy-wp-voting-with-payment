@@ -3,7 +3,7 @@ Contributors: mujhtech222
 Donate link: https://mujh.tech
 Tags: paystack, wordpress, vote, payment, mastercard, visa
 Requires at least: 4.7
-Tested up to: 5.5
+Tested up to: 5.7
 Stable tag: 5.6.4
 Requires PHP: 5.6
 License: GPLv2 or later

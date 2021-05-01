@@ -66,7 +66,7 @@ function ewvwp_manage_taxonomies_columns($out, $column_name, $theme_id) {
 		case 'shortcode':
 		$out .= '[ewvwp_plugin contest="'.$theme_id.'"]'; 
 		break;
-		
+
 		default:
 		break;
 	}
@@ -210,7 +210,7 @@ function ewvwp_vote_callback( $post ){
 	$final_value = (!empty($value)) ? $value : 0;
 
 	echo '<label for="ewvwp_vote_field"> Number of Votes </label><br><br> ';
-	echo '<input type="number" name="ewvwp_vote_field" id="ewvwp_vote_field" readonly value="'. esc_attr( $final_value ).'" size="25"/>';
+	echo '<input type="number" name="ewvwp_vote_field" id="ewvwp_vote_field" value="'. esc_attr( $final_value ).'" size="25"/>';
 }
 
 function ewvwp_age_callback( $post ){
