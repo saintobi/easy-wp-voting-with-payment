@@ -67,17 +67,6 @@ function ewvwp_ajax()
                   'success' => true,
                   'message' => "Thanks for voting"
                 );
-              
-                //$from = "mujhtech@gmail.com";
-                //$title = "Easy Wp Voting With Payment";
-                //$headers = "From: $title <$from> \r\n";
-                //$headers .= "Reply-To: $title <$from> \r\n";
-                //$headers .= "MIME-Version: 1.0\r\n";
-                //$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-                //$message = "Thanks for voting, we appreciate your votes";
-
-                //wp_mail($to, $subject, $message, $headers);
                 
                 return wp_send_json( $result );
             }

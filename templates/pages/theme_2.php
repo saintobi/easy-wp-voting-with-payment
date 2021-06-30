@@ -247,7 +247,7 @@
                 //this happens after the payment is completed successfully
                 var reference = response.reference;
                 console.log(reference);
-                $.ajax({
+                jQuery.ajax({
                     url : ajaxurl,
                     type : 'post',
                     dataType: 'json',
@@ -265,7 +265,7 @@
                         if(response.success == true){
                             document.getElementById("ewvwp-theme-2-form").reset();
                             alert(response.message);
-                            setTimeout(window.location.reload(), 3000);
+                            setTimeout(window.location.reload(), 500);
                         } else {
                             //console.log(response.message);
                             alert(response.message);

@@ -104,7 +104,7 @@ wp_reset_postdata();
             //this happens after the payment is completed successfully
             var reference = response.reference;
             console.log(reference);
-            $.ajax({
+            jQuery.ajax({
                 url : ajaxurl,
                 type : 'post',
                 dataType: 'json',
@@ -123,7 +123,7 @@ wp_reset_postdata();
                         //$('#easy-wp-voting-form-'+formid).css('display', 'none');
                         //$('.easy-wp-voting-form-success-'+formid).css({'display':'block'})
                         alert(response.message);
-                        setTimeout(window.location.reload(), 3000);
+                        setTimeout(window.location.reload(), 500);
                     } else {
                         //console.log(response.message);
                         alert(response.message);
